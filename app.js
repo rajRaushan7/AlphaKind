@@ -25,15 +25,23 @@ const upload = multer({ storage });
 // ---------------------------------------------------------------------------------------
 // CONNECT OT DATABASE 
 
+async function main() {
+    await mongoose.connect("mongodb://127.0.0.1:27017/biologicalWorld");
+};
+
 main().then(() => {
     console.log("connecting to DataBase");
 }).catch((err) => {
     console.log(err);
 });
 
-async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/biologicalWorld");
-};
+mongoose.connection.on("error", (err) => {
+    console.error("Database connection error:", err);
+});
+mongoose.connection.once("open", () => {
+    console.log("Connected to the database");
+});
+
 // -----------------------------------------------------------------------------------------------------
 // APP.SET
 
@@ -43,7 +51,7 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
-app.use("public/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/public/uploads", express.static(path.join(__dirname, "public/uploads")));
 // -----------------------------------------------------------------------------------------------------
 //  ALL APIs
 
@@ -132,7 +140,3 @@ app.put("/notes/:id", async (req, res) => {
     await Note.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect("/all-notes/delete");
 })
-// ------------------------------------------------------------------------------------------
-app.listen(3030, () => {
-    console.log("app is listening to port: 3035");
-});
