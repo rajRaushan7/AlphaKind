@@ -140,3 +140,9 @@ app.put("/notes/:id", async (req, res) => {
     await Note.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect("/all-notes/delete");
 })
+
+// --------------------------------------------------------------------------------------------------------
+
+app.listen(3030, () => {
+    console.log("app is listening to port: 3030");
+});
