@@ -9,6 +9,8 @@ const methodOverride = require("method-override");
 const multer = require("multer");
 const fs = require("fs");
 
+const port = process.env.PORT || 4000;
+
 const app = express();
 // ---------------------------------------------------------------------------------------
 const storage = multer.diskStorage({
@@ -143,6 +145,6 @@ app.put("/notes/:id", async (req, res) => {
 
 // --------------------------------------------------------------------------------------------------------
 
-app.listen(3030, () => {
-    console.log("app is listening to port: 3030");
+app.listen(port, () => {
+    console.log(`app is listening to port: ${port}`);
 });
