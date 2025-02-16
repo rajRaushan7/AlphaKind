@@ -9,7 +9,7 @@ main().then(() => {
 });
 
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/biologicalWorld");
+    await mongoose.connect("mongodb+srv://raj1618192:vbXX9359EoZN0tbQ@alphakind.j7gp3.mongodb.net/?retryWrites=true&w=majority&appName=alphaKind");
 };
 
 const initDB = async () => {
@@ -19,3 +19,6 @@ const initDB = async () => {
 };
 
 initDB();
+
+// userName Mongodb - raj1618192
+// password mongodv - vbXX9359EoZN0tbQ
