@@ -1,5 +1,5 @@
 // main file
-// npm init, install - node, express, mongoose,
+// npm init, install - node, express, mongoose, express-validator
 
 const connectToMongodb = require("./db");
 const express = require("express");
@@ -12,7 +12,7 @@ const port = 3080;
 app.use(express.json()); // middleware used for using res.body content
 
 // all ports
-
+app.use('/api/notes/', require('./routes/allNotes'));
 
 
 app.listen(port, () => {
