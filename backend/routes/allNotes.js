@@ -20,19 +20,33 @@ router.get('/uploadNotes', [
     // uploading notes
     try {
         const { title, pdfURL, semester, subject } = req.body;
+        
+        // If notes with same title already exists
+        let notes = await Note.findOne({ pdfURL: req.body.pdfURL });
+        if(notes){
+            return res.status(400).send("Notes with this URL already exists");
+        }
+        // Saving notes to db
         const note = new Note({
             title, pdfURL, semester, subject
         });
-
         const saveNote = await note.save();
-        
         if(!saveNote){
             return res.send(400).json({ error: "Internal Server Error"});
         }
         res.json(saveNote)
-
     } catch (error) {
         return res.status(500).send("Internal Server Error");
+    }
+});
+
+// Route 2: Fetch all notes using: GET 'api/notes/fetchAllNotes'
+router.get('/fetchAllNotes', async (req, res) => {
+    try {
+        const notes = await Note.find({});
+        return res.json({notes});
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error"});
     }
 });
 
