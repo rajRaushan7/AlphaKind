@@ -99,4 +99,30 @@ router.get('/semWiseNotes', async (req, res) => {
     }
 });
 
+// Route 5: Edit notes using: POST 'api/notes/editNotes/:id'
+
+router.post('/editNotes/:id', async (req, res) => {
+    try {
+        const { title, semester, subject } = req.body;
+        const newNote = {};
+
+        if(title){ newNote.title = title; }
+        if(semester){ newNote.semester = semester; }
+        if(subject){ newNote.subject = subject; }
+
+        // Find notes to update
+
+        let note = await Note.findById(req.params.id);
+        if(!note){
+            return res.status(404).send("Not Found");
+        }
+        note = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
+        return res.json({note});
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = router;
