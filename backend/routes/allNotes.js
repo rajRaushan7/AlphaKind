@@ -4,7 +4,7 @@ const Note = require("../models/Note");
 const { body, validationResult } = require('express-validator');
 
 // Route 1: upload a new notes using : POST '/api/notes/uploadNotes'
-router.get('/uploadNotes', [
+router.post('/uploadNotes', [
     body('title', 'title should contain minimun 3 characters').isLength({ min : 3}),
     body('pdfURL', 'please enter a valid URL').isLength({ min : 5 }),
     body('semester', 'please enter a valid semester').isInt({ min : 1, max : 8}),
@@ -40,7 +40,7 @@ router.get('/uploadNotes', [
     }
 });
 
-// Route 2: Fetch all notes using: GET 'api/notes/fetchAllNotes'
+// Route 2: Fetch all notes using: GET '/api/notes/fetchAllNotes'
 router.get('/fetchAllNotes', async (req, res) => {
     try {
         const notes = await Note.find({});
@@ -50,7 +50,7 @@ router.get('/fetchAllNotes', async (req, res) => {
     }
 });
 
-// Router 3: Fetch all Subjects of a particular semester using GET 'api/notes/subjects'
+// Router 3: Fetch all Subjects of a particular semester using GET '/api/notes/subjects'
 
 router.get('/subjects', async (req, res) => {
     try {
@@ -79,7 +79,7 @@ router.get('/subjects', async (req, res) => {
     }
 });
 
-// Route 4: Fetch all semester wise notes using: GET 'api/notes/semWiseNotes'
+// Route 4: Fetch all semester wise notes using: GET '/api/notes/semWiseNotes'
 
 router.get('/semWiseNotes', async (req, res) => {
     try {
@@ -99,9 +99,9 @@ router.get('/semWiseNotes', async (req, res) => {
     }
 });
 
-// Route 5: Edit notes using: POST 'api/notes/editNotes/:id'
+// Route 5: Edit notes using: PUT '/api/notes/editNotes/:id'
 
-router.post('/editNotes/:id', async (req, res) => {
+router.put('/editNotes/:id', async (req, res) => {
     try {
         const { title, semester, subject } = req.body;
         const newNote = {};
@@ -121,6 +121,25 @@ router.post('/editNotes/:id', async (req, res) => {
 
     } catch (error) {
         console.error(error);
+        return res.status(500).send("Internal Server Error");
+    }
+});
+
+// Route 6: Delete Note using: Delete '/api/notes/deleteNote/:id'
+router.delete('/deleteNote/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const note = await Note.findById(id);
+        if(!note){
+            return res.status(404).send("Note not found");
+        }
+    
+        const deletedNote = await Note.findByIdAndDelete(id);
+        if(!deletedNote){
+            return res.status(500).send("Note not deleted due to some Internal Server Error");
+        }
+        return res.status(201).json({Success: "Note Deletion Successful", deletedNote});
+    } catch (error) {
         return res.status(500).send("Internal Server Error");
     }
 });
