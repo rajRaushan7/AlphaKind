@@ -1,20 +1,24 @@
 body{
     background-color: black;
+    font-family: "Montserrat", sans-serif;
     color: white;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background-image: URL('../public/photo-1478760329108-5c3ed9d495a0.jpeg');
+    /* background-image: URL('../public/pexels-negativespace-48604.jpg'); */
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
 /* --------------------------NavBar---------------------------------- */
 .navbar{
-    height: 4.7rem;
-    background-color: rgba(0, 0, 0, 0.445);
-    backdrop-filter: blur(30px);
+    height: 4.2rem;
+    background-color: rgba(15, 15, 15, 0.744);
+    border: 2px solid rgb(67, 67, 67);
+    /* box-shadow: 0 0 2rem rgb(255, 255, 255); */
+    backdrop-filter: blur(5px);
     width: 60rem;
     display: flex;
     flex-wrap: wrap;
@@ -55,11 +59,11 @@ body{
 .nav-options{
     color: white;
     text-decoration: none;
-    font-size: 1.7rem;
-    transition: 0.2s;
+    font-size: 1.3rem;
+    transition: 0.17s;
 }
 .nav-options:hover{
-    transform: scale(1.1);
+    transform: scale(1.07);
 }
 @media (max-width: 1078px) {
     .navbar{
