@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import AllNotes from './components/AllNotes';
 import NotesBySem from './components/NotesBySem';
+import UploadNotes from './components/UploadNotes';
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path = '/contactUs'>
             <ContactUs />
+          </Route>
+          <Route exact path = '/uploadNotes'>
+            <UploadNotes />
           </Route>
         </Switch>
       </Router>

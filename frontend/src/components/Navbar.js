@@ -37,6 +37,7 @@ const Navbar = () => {
                 <Link className='nav-options' to="/allNotes">All Notes</Link>
                 <Link className='nav-options' to="/notesBySem">Notes by Sem</Link>
                 <Link className='nav-options' to='/contactUs'>Contact Us</Link>
+                <Link className='nav-options' to='/uploadNotes'>Upload Notes</Link>
             </nav>
             <i className="fa-solid fa-bars toggle-bar" onClick={ toggleNav } style={{display: `${bar}`}}></i>
             {/* Mobile nav */}
@@ -46,6 +47,7 @@ const Navbar = () => {
                 <Link className='nav-options' to="/allNotes" onClick = { newPage }>All Notes</Link>
                 <Link className='nav-options' to="/notesBySem" onClick = { newPage }>Notes by Sem</Link>
                 <Link className='nav-options' to='/contactUs' onClick = { newPage }>Contact Us</Link>
+                <Link className='nav-options' to='/uploadNotes' onClick = { newPage }>Upload Notes</Link>
             </nav>
         </>
     );

@@ -7,7 +7,7 @@ const express = require("express");
 connectToMongodb(); // connected to db by calling a function written in db.js
 
 const app = express();
-const port = 3080;
+const port = process.env.PORT || 8080;
 
 app.use(express.json()); // middleware used for using res.body content
 
