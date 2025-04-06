@@ -4,6 +4,7 @@ import Home from './components/Home';
 import AllNotes from './components/AllNotes';
 import NotesBySem from './components/NotesBySem';
 import UploadNotes from './components/UploadNotes';
+import NoteState from './context/notes/NoteState';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,7 +22,9 @@ function App() {
             <Home />
           </Route>
           <Route exact path = '/allNotes'>
+          <NoteState>
             <AllNotes />
+          </NoteState>
           </Route>
           <Route exact path = '/notesBySem'>
             <NotesBySem />
